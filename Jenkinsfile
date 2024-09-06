@@ -70,7 +70,7 @@ pipeline {
         stage('Deploy to Production') {
             steps {
                 echo 'Deploying to Production...'
-                // Example AWS CLI command to deploy to production
+                // Example AWS CLI command to deploy to productios
             }
         }
     }
