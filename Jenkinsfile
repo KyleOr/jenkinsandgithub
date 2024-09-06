@@ -58,7 +58,7 @@ pipeline {
         stage('Deploy to Staging') {
             steps {
                 echo 'Deploying to Staging...'
-                // Example AWS CLI command to deploy to an EC2 instance
+                // Example AWS CLI command to deploy to an EC2 instanc
                 sh 'aws deploy create-deployment --application-name YOUR_APP --deployment-group-name STAGING --s3-location bucket=your-bucket,bundleType=zip,key=your-app.zip'
             }
         }
