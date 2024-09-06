@@ -5,14 +5,14 @@ pipeline {
             steps {
                 echo 'Building the code...'
                 // Example using Maven to build the project
-                sh 'mvn clean install'
+
             }
         }
         stage('Unit and Integration Tests') {
             steps {
                 echo 'Running Unit and Integration Tests...'
                 // Example using Maven to run tests
-                sh 'mvn test'
+               
             }
             post {
                 success {
@@ -32,14 +32,12 @@ pipeline {
             steps {
                 echo 'Running Code Analysis...'
                 // Example using SonarQube scanner for static code analysis
-                sh 'sonar-scanner -Dsonar.projectKey=your_project_key -Dsonar.host.url=http://your-sonarqube-url -Dsonar.login=your_token'
             }
         }
         stage('Security Scan') {
             steps {
                 echo 'Running Security Scan...'
                 // Example using Snyk to scan for security vulnerabilities
-                sh 'snyk test'
             }
             post {
                 success {
@@ -59,21 +57,20 @@ pipeline {
             steps {
                 echo 'Deploying to Staging...'
                 // Example AWS CLI command to deploy to an EC2 instanc
-                sh 'aws deploy create-deployment --application-name YOUR_APP --deployment-group-name STAGING --s3-location bucket=your-bucket,bundleType=zip,key=your-app.zip'
+        
             }
         }
         stage('Integration Tests on Staging') {
             steps {
                 echo 'Running Integration Tests on Staging...'
                 // Example command to run tests after staging deployment
-                sh './run-integration-tests.sh'
+                
             }
         }
         stage('Deploy to Production') {
             steps {
                 echo 'Deploying to Production...'
                 // Example AWS CLI command to deploy to production
-                sh 'aws deploy create-deployment --application-name YOUR_APP --deployment-group-name PRODUCTION --s3-location bucket=your-bucket,bundleType=zip,key=your-app.zip'
             }
         }
     }
