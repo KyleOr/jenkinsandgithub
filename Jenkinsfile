@@ -12,6 +12,19 @@ pipeline {
                 echo 'Running Unit and Integration Tests...'
                 // Example: sh 'mvn test'
             }
+            post {
+                success {
+                    emailext subject: "SUCCESS: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                             body: "Unit and Integration Tests stage passed successfully! View logs at: ${env.BUILD_URL}",
+                             to: 'developer@example.com'
+                }
+                failure {
+                    emailext subject: "FAILURE: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                             body: "Unit and Integration Tests stage failed. Check logs at: ${env.BUILD_URL}",
+                             to: 'developer@example.com',
+                             attachmentsPattern: '**/logs/*.*'
+                }
+            }
         }
         stage('Code Analysis') {
             steps {
@@ -23,6 +36,19 @@ pipeline {
             steps {
                 echo 'Running Security Scan...'
                 // Example: sh 'snyk test'
+            }
+            post {
+                success {
+                    emailext subject: "SUCCESS: Security Scan Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                             body: "Security Scan stage passed successfully! View logs at: ${env.BUILD_URL}",
+                             to: 'developer@example.com'
+                }
+                failure {
+                    emailext subject: "FAILURE: Security Scan Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                             body: "Security Scan stage failed. Check logs at: ${env.BUILD_URL}",
+                             to: 'developer@example.com',
+                             attachmentsPattern: '**/logs/*.*'
+                }
             }
         }
         stage('Deploy to Staging') {
@@ -43,26 +69,5 @@ pipeline {
                 // Example: sh 'aws deploy create-deployment --application-name YOUR_APP --deployment-group-name PRODUCTION'
             }
         }
-
-        stage('Unit and Integration Tests') {
-    steps {
-        echo 'Running Unit and Integration Tests...'
-        // Run your test commands here
-    }
-    post {
-        success {
-            emailext subject: "SUCCESS: Test Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                     body: "Test stage passed successfully! View logs at: ${env.BUILD_URL}",
-                     to: 'developer@example.com'
-        }
-        failure {
-            emailext subject: "FAILURE: Test Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                     body: "Test stage failed. Check logs at: ${env.BUILD_URL}",
-                     to: 'developer@example.com',
-                     attachmentsPattern: '**/logs/*.*'
-        }
-    }
-}
-
     }
 }
