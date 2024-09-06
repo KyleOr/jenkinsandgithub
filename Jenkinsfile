@@ -43,5 +43,26 @@ pipeline {
                 // Example: sh 'aws deploy create-deployment --application-name YOUR_APP --deployment-group-name PRODUCTION'
             }
         }
+
+        stage('Unit and Integration Tests') {
+    steps {
+        echo 'Running Unit and Integration Tests...'
+        // Run your test commands here
+    }
+    post {
+        success {
+            emailext subject: "SUCCESS: Test Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                     body: "Test stage passed successfully! View logs at: ${env.BUILD_URL}",
+                     to: 'developer@example.com'
+        }
+        failure {
+            emailext subject: "FAILURE: Test Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                     body: "Test stage failed. Check logs at: ${env.BUILD_URL}",
+                     to: 'developer@example.com',
+                     attachmentsPattern: '**/logs/*.*'
+        }
+    }
+}
+
     }
 }
