@@ -16,12 +16,12 @@ pipeline {
                 success {
                     emailext subject: "SUCCESS: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                              body: "Unit and Integration Tests stage passed successfully! View logs at: ${env.BUILD_URL}",
-                             to: 'developer@example.com'
+                             to: 'kyleerikoris@gmail.com'
                 }
                 failure {
                     emailext subject: "FAILURE: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                              body: "Unit and Integration Tests stage failed. Check logs at: ${env.BUILD_URL}",
-                             to: 'developer@example.com',
+                             to: 'kyleerikoris@gmail.com',
                              attachmentsPattern: '**/logs/*.*'
                 }
             }
@@ -41,12 +41,12 @@ pipeline {
                 success {
                     emailext subject: "SUCCESS: Security Scan Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                              body: "Security Scan stage passed successfully! View logs at: ${env.BUILD_URL}",
-                             to: 'developer@example.com'
+                             to: 'kyleerikoris@gmail.com'
                 }
                 failure {
                     emailext subject: "FAILURE: Security Scan Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                              body: "Security Scan stage failed. Check logs at: ${env.BUILD_URL}",
-                             to: 'developer@example.com',
+                             to: 'kyleerikoris@gmail.com',
                              attachmentsPattern: '**/logs/*.*'
                 }
             }
