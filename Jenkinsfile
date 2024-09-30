@@ -16,7 +16,7 @@ pipeline {
             }
             post {
                 success {
-                    emailext subject: "SUCCESS!: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    emailext subject: "SUCCESS!!: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                              body: "Unit and Integration Tests stage passed successfully! View logs at: ${env.BUILD_URL}",
                              to: 'kyleerikoris@gmail.com'
                 }
