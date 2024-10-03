@@ -14,10 +14,10 @@ pipeline {
             }
             post {
                 success {
-                    // Save the logs to a file
+                    // Save the logs to a file on Windows
                     script {
-                        def logFile = "${env.WORKSPACE}/unit_integration_tests.log"
-                        sh "cat ${env.WORKSPACE}@tmp/*.log > ${logFile}"
+                        def logFile = "${env.WORKSPACE}\\unit_integration_tests.log"
+                        bat "type \"${env.WORKSPACE}@tmp\\*.log\" > \"${logFile}\""
                     }
 
                     emailext attachmentsPattern: 'unit_integration_tests.log',
@@ -27,8 +27,8 @@ pipeline {
                 }
                 failure {
                     script {
-                        def logFile = "${env.WORKSPACE}/unit_integration_tests.log"
-                        sh "cat ${env.WORKSPACE}@tmp/*.log > ${logFile}"
+                        def logFile = "${env.WORKSPACE}\\unit_integration_tests.log"
+                        bat "type \"${env.WORKSPACE}@tmp\\*.log\" > \"${logFile}\""
                     }
 
                     emailext attachmentsPattern: 'unit_integration_tests.log',
@@ -52,8 +52,8 @@ pipeline {
             post {
                 success {
                     script {
-                        def logFile = "${env.WORKSPACE}/security_scan.log"
-                        sh "cat ${env.WORKSPACE}@tmp/*.log > ${logFile}"
+                        def logFile = "${env.WORKSPACE}\\security_scan.log"
+                        bat "type \"${env.WORKSPACE}@tmp\\*.log\" > \"${logFile}\""
                     }
 
                     emailext attachmentsPattern: 'security_scan.log',
@@ -63,8 +63,8 @@ pipeline {
                 }
                 failure {
                     script {
-                        def logFile = "${env.WORKSPACE}/security_scan.log"
-                        sh "cat ${env.WORKSPACE}@tmp/*.log > ${logFile}"
+                        def logFile = "${env.WORKSPACE}\\security_scan.log"
+                        bat "type \"${env.WORKSPACE}@tmp\\*.log\" > \"${logFile}\""
                     }
 
                     emailext attachmentsPattern: 'security_scan.log',
