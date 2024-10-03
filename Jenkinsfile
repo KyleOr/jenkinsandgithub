@@ -14,36 +14,23 @@ pipeline {
             }
             post {
                 success {
-                    // Save the logs to a file on Windows
+                    // Use the correct log path for the current build
                     script {
-                        def logFile = "${env.WORKSPACE}\\unit_integration_tests.log"
-                        bat """
-                        if exist "${env.WORKSPACE}@tmp\\*.log" (
-                            for %f in (${env.WORKSPACE}@tmp\\*.log) do type "%f" >> "${logFile}"
-                        ) else (
-                            echo No log files found.
-                        )
-                        """
+                        def logFile = "${env.JENKINS_HOME}\\jobs\\${env.JOB_NAME}\\builds\\${env.BUILD_NUMBER}\\log"
                     }
 
-                    emailext attachmentsPattern: 'unit_integration_tests.log',
+                    emailext attachmentsPattern: "${env.JENKINS_HOME}\\jobs\\${env.JOB_NAME}\\builds\\${env.BUILD_NUMBER}\\log",
                              body: "Unit and Integration Tests stage passed successfully! See the attached logs or view them at: ${env.BUILD_URL}", 
                              subject: "SUCCESS!!: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
                              to: 'kyleerikoris@gmail.com'
                 }
                 failure {
+                    // Use the correct log path for the current build
                     script {
-                        def logFile = "${env.WORKSPACE}\\unit_integration_tests.log"
-                        bat """
-                        if exist "${env.WORKSPACE}@tmp\\*.log" (
-                            for %f in (${env.WORKSPACE}@tmp\\*.log) do type "%f" >> "${logFile}"
-                        ) else (
-                            echo No log files found.
-                        )
-                        """
+                        def logFile = "${env.JENKINS_HOME}\\jobs\\${env.JOB_NAME}\\builds\\${env.BUILD_NUMBER}\\log"
                     }
 
-                    emailext attachmentsPattern: 'unit_integration_tests.log',
+                    emailext attachmentsPattern: "${env.JENKINS_HOME}\\jobs\\${env.JOB_NAME}\\builds\\${env.BUILD_NUMBER}\\log",
                              body: "Unit and Integration Tests stage failed. See the attached logs or view them at: ${env.BUILD_URL}", 
                              subject: "FAILURE: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
                              to: 'kyleerikoris@gmail.com'
@@ -63,36 +50,12 @@ pipeline {
             }
             post {
                 success {
-                    script {
-                        def logFile = "${env.WORKSPACE}\\security_scan.log"
-                        bat """
-                        if exist "${env.WORKSPACE}@tmp\\*.log" (
-                            for %f in (${env.WORKSPACE}@tmp\\*.log) do type "%f" >> "${logFile}"
-                        ) else (
-                            echo No log files found.
-                        )
-                        """
-                    }
-
-                    emailext attachmentsPattern: 'security_scan.log',
-                             body: "Security Scan stage passed successfully! See the attached logs or view them at: ${env.BUILD_URL}", 
+                    emailext body: "Security Scan stage passed successfully! View logs at: ${env.BUILD_URL}", 
                              subject: "SUCCESS: Security Scan Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
                              to: 'kyleerikoris@gmail.com'
                 }
                 failure {
-                    script {
-                        def logFile = "${env.WORKSPACE}\\security_scan.log"
-                        bat """
-                        if exist "${env.WORKSPACE}@tmp\\*.log" (
-                            for %f in (${env.WORKSPACE}@tmp\\*.log) do type "%f" >> "${logFile}"
-                        ) else (
-                            echo No log files found.
-                        )
-                        """
-                    }
-
-                    emailext attachmentsPattern: 'security_scan.log',
-                             body: "Security Scan stage failed. See the attached logs or view them at: ${env.BUILD_URL}", 
+                    emailext body: "Security Scan stage failed. Check logs at: ${env.BUILD_URL}", 
                              subject: "FAILURE: Security Scan Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
                              to: 'kyleerikoris@gmail.com'
                 }
