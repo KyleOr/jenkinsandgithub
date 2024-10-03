@@ -14,23 +14,15 @@ pipeline {
             }
             post {
                 success {
-                    // Use the correct log path for the current build
-                    script {
-                        def logFile = "${env.JENKINS_HOME}\\jobs\\${env.JOB_NAME}\\builds\\${env.BUILD_NUMBER}\\log"
-                    }
-
-                    emailext attachmentsPattern: "${env.JENKINS_HOME}\\jobs\\${env.JOB_NAME}\\builds\\${env.BUILD_NUMBER}\\log",
+                    // Sending the email on success with log attachment using Ant GLOB pattern
+                    emailext attachmentsPattern: '**/log',
                              body: "Unit and Integration Tests stage passed successfully! See the attached logs or view them at: ${env.BUILD_URL}", 
                              subject: "SUCCESS!!: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
                              to: 'kyleerikoris@gmail.com'
                 }
                 failure {
-                    // Use the correct log path for the current build
-                    script {
-                        def logFile = "${env.JENKINS_HOME}\\jobs\\${env.JOB_NAME}\\builds\\${env.BUILD_NUMBER}\\log"
-                    }
-
-                    emailext attachmentsPattern: "${env.JENKINS_HOME}\\jobs\\${env.JOB_NAME}\\builds\\${env.BUILD_NUMBER}\\log",
+                    // Sending the email on failure with log attachment using Ant GLOB pattern
+                    emailext attachmentsPattern: '**/log',
                              body: "Unit and Integration Tests stage failed. See the attached logs or view them at: ${env.BUILD_URL}", 
                              subject: "FAILURE: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
                              to: 'kyleerikoris@gmail.com'
