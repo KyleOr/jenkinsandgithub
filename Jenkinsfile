@@ -17,7 +17,7 @@ pipeline {
                     // Sending the email on success with log attachment using Ant GLOB pattern
                     emailext attachmentsPattern: '**/log',
                              body: "Unit and Integration Tests stage passed successfully! See the attached logs or view them at: ${env.BUILD_URL}", 
-                             subject: "SUCCESS!!: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
+                             subject: "SUCCESS: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
                              to: 'kyleerikoris@gmail.com'
                 }
                 failure {
