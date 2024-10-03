@@ -14,16 +14,27 @@ pipeline {
             }
             post {
                 success {
-                    mail bcc: '', 
-                         body: "Unit and Integration Tests stage passed successfully! View logs at: ${env.BUILD_URL}", 
-                         subject: "SUCCESS!!: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
-                         to: 'kyleerikoris@gmail.com'
+                    // Save the logs to a file
+                    script {
+                        def logFile = "${env.WORKSPACE}/unit_integration_tests.log"
+                        sh "cat ${env.WORKSPACE}@tmp/*.log > ${logFile}"
+                    }
+
+                    emailext attachmentsPattern: 'unit_integration_tests.log',
+                             body: "Unit and Integration Tests stage passed successfully! See the attached logs or view them at: ${env.BUILD_URL}", 
+                             subject: "SUCCESS!!: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
+                             to: 'kyleerikoris@gmail.com'
                 }
                 failure {
-                    mail bcc: '', 
-                         body: "Unit and Integration Tests stage failed. Check logs at: ${env.BUILD_URL}", 
-                         subject: "FAILURE: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
-                         to: 'kyleerikoris@gmail.com'
+                    script {
+                        def logFile = "${env.WORKSPACE}/unit_integration_tests.log"
+                        sh "cat ${env.WORKSPACE}@tmp/*.log > ${logFile}"
+                    }
+
+                    emailext attachmentsPattern: 'unit_integration_tests.log',
+                             body: "Unit and Integration Tests stage failed. See the attached logs or view them at: ${env.BUILD_URL}", 
+                             subject: "FAILURE: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
+                             to: 'kyleerikoris@gmail.com'
                 }
             }
         }
@@ -40,16 +51,26 @@ pipeline {
             }
             post {
                 success {
-                    mail bcc: '', 
-                         body: "Security Scan stage passed successfully! View logs at: ${env.BUILD_URL}", 
-                         subject: "SUCCESS: Security Scan Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
-                         to: 'kyleerikoris@gmail.com'
+                    script {
+                        def logFile = "${env.WORKSPACE}/security_scan.log"
+                        sh "cat ${env.WORKSPACE}@tmp/*.log > ${logFile}"
+                    }
+
+                    emailext attachmentsPattern: 'security_scan.log',
+                             body: "Security Scan stage passed successfully! See the attached logs or view them at: ${env.BUILD_URL}", 
+                             subject: "SUCCESS: Security Scan Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
+                             to: 'kyleerikoris@gmail.com'
                 }
                 failure {
-                    mail bcc: '', 
-                         body: "Security Scan stage failed. Check logs at: ${env.BUILD_URL}", 
-                         subject: "FAILURE: Security Scan Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
-                         to: 'kyleerikoris@gmail.com'
+                    script {
+                        def logFile = "${env.WORKSPACE}/security_scan.log"
+                        sh "cat ${env.WORKSPACE}@tmp/*.log > ${logFile}"
+                    }
+
+                    emailext attachmentsPattern: 'security_scan.log',
+                             body: "Security Scan stage failed. See the attached logs or view them at: ${env.BUILD_URL}", 
+                             subject: "FAILURE: Security Scan Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
+                             to: 'kyleerikoris@gmail.com'
                 }
             }
         }
