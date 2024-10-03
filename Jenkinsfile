@@ -17,7 +17,13 @@ pipeline {
                     // Save the logs to a file on Windows
                     script {
                         def logFile = "${env.WORKSPACE}\\unit_integration_tests.log"
-                        bat "type \"${env.WORKSPACE}@tmp\\*.log\" > \"${logFile}\""
+                        bat """
+                        if exist "${env.WORKSPACE}@tmp\\*.log" (
+                            for %f in (${env.WORKSPACE}@tmp\\*.log) do type "%f" >> "${logFile}"
+                        ) else (
+                            echo No log files found.
+                        )
+                        """
                     }
 
                     emailext attachmentsPattern: 'unit_integration_tests.log',
@@ -28,7 +34,13 @@ pipeline {
                 failure {
                     script {
                         def logFile = "${env.WORKSPACE}\\unit_integration_tests.log"
-                        bat "type \"${env.WORKSPACE}@tmp\\*.log\" > \"${logFile}\""
+                        bat """
+                        if exist "${env.WORKSPACE}@tmp\\*.log" (
+                            for %f in (${env.WORKSPACE}@tmp\\*.log) do type "%f" >> "${logFile}"
+                        ) else (
+                            echo No log files found.
+                        )
+                        """
                     }
 
                     emailext attachmentsPattern: 'unit_integration_tests.log',
@@ -53,7 +65,13 @@ pipeline {
                 success {
                     script {
                         def logFile = "${env.WORKSPACE}\\security_scan.log"
-                        bat "type \"${env.WORKSPACE}@tmp\\*.log\" > \"${logFile}\""
+                        bat """
+                        if exist "${env.WORKSPACE}@tmp\\*.log" (
+                            for %f in (${env.WORKSPACE}@tmp\\*.log) do type "%f" >> "${logFile}"
+                        ) else (
+                            echo No log files found.
+                        )
+                        """
                     }
 
                     emailext attachmentsPattern: 'security_scan.log',
@@ -64,7 +82,13 @@ pipeline {
                 failure {
                     script {
                         def logFile = "${env.WORKSPACE}\\security_scan.log"
-                        bat "type \"${env.WORKSPACE}@tmp\\*.log\" > \"${logFile}\""
+                        bat """
+                        if exist "${env.WORKSPACE}@tmp\\*.log" (
+                            for %f in (${env.WORKSPACE}@tmp\\*.log) do type "%f" >> "${logFile}"
+                        ) else (
+                            echo No log files found.
+                        )
+                        """
                     }
 
                     emailext attachmentsPattern: 'security_scan.log',
