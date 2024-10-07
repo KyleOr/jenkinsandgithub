@@ -15,15 +15,29 @@ pipeline {
             }
             post {
                 success {
+                    // Basic email notification
+                    mail bcc: '', 
+                         body: "Unit and Integration Tests stage passed successfully! View logs at: ${env.BUILD_URL}", 
+                         subject: "SUCCESS: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
+                         to: 'kyleerikoris@gmail.com'
+
+                    // Email with log attachment
                     emailext attachLog: true, 
                              body: "Unit and Integration Tests stage passed successfully! View logs at: ${env.BUILD_URL}", 
-                             subject: "SUCCESS!: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
+                             subject: "SUCCESS with Logs: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
                              to: 'kyleerikoris@gmail.com'
                 }
                 failure {
+                    // Basic email notification
+                    mail bcc: '', 
+                         body: "Unit and Integration Tests stage failed. Check logs at: ${env.BUILD_URL}", 
+                         subject: "FAILURE: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
+                         to: 'kyleerikoris@gmail.com'
+
+                    // Email with log attachment
                     emailext attachLog: true, 
                              body: "Unit and Integration Tests stage failed. Check logs at: ${env.BUILD_URL}", 
-                             subject: "FAILURE: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
+                             subject: "FAILURE with Logs: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
                              to: 'kyleerikoris@gmail.com'
                 }
             }
@@ -43,15 +57,29 @@ pipeline {
             }
             post {
                 success {
+                    // Basic email notification
+                    mail bcc: '', 
+                         body: "Security Scan stage passed successfully! View logs at: ${env.BUILD_URL}", 
+                         subject: "SUCCESS: Security Scan Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
+                         to: 'kyleerikoris@gmail.com'
+
+                    // Email with log attachment
                     emailext attachLog: true, 
                              body: "Security Scan stage passed successfully! View logs at: ${env.BUILD_URL}", 
-                             subject: "SUCCESS: Security Scan Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
+                             subject: "SUCCESS with Logs: Security Scan Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
                              to: 'kyleerikoris@gmail.com'
                 }
                 failure {
+                    // Basic email notification
+                    mail bcc: '', 
+                         body: "Security Scan stage failed. Check logs at: ${env.BUILD_URL}", 
+                         subject: "FAILURE: Security Scan Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
+                         to: 'kyleerikoris@gmail.com'
+
+                    // Email with log attachment
                     emailext attachLog: true, 
                              body: "Security Scan stage failed. Check logs at: ${env.BUILD_URL}", 
-                             subject: "FAILURE: Security Scan Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
+                             subject: "FAILURE with Logs: Security Scan Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
                              to: 'kyleerikoris@gmail.com'
                 }
             }
@@ -64,9 +92,16 @@ pipeline {
             }
             post {
                 always {
+                    // Basic email notification
+                    mail bcc: '', 
+                         body: "Deploy to Staging completed. View logs at: ${env.BUILD_URL}", 
+                         subject: "Deploy to Staging - ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
+                         to: 'kyleerikoris@gmail.com'
+
+                    // Email with log attachment
                     emailext attachLog: true, 
                              body: "Deploy to Staging completed. View logs at: ${env.BUILD_URL}", 
-                             subject: "Deploy to Staging - ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
+                             subject: "Deploy to Staging with Logs - ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
                              to: 'kyleerikoris@gmail.com'
                 }
             }
@@ -79,9 +114,16 @@ pipeline {
             }
             post {
                 always {
+                    // Basic email notification
+                    mail bcc: '', 
+                         body: "Integration Tests on Staging completed. View logs at: ${env.BUILD_URL}", 
+                         subject: "Integration Tests on Staging - ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
+                         to: 'kyleerikoris@gmail.com'
+
+                    // Email with log attachment
                     emailext attachLog: true, 
                              body: "Integration Tests on Staging completed. View logs at: ${env.BUILD_URL}", 
-                             subject: "Integration Tests on Staging - ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
+                             subject: "Integration Tests on Staging with Logs - ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
                              to: 'kyleerikoris@gmail.com'
                 }
             }
@@ -94,9 +136,16 @@ pipeline {
             }
             post {
                 always {
+                    // Basic email notification
+                    mail bcc: '', 
+                         body: "Deployed to Production. View logs at: ${env.BUILD_URL}", 
+                         subject: "Deploy to Production - ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
+                         to: 'kyleerikoris@gmail.com'
+
+                    // Email with log attachment
                     emailext attachLog: true, 
                              body: "Deployed to Production. View logs at: ${env.BUILD_URL}", 
-                             subject: "Deploy to Production - ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
+                             subject: "Deploy to Production with Logs - ${env.JOB_NAME} #${env.BUILD_NUMBER}", 
                              to: 'kyleerikoris@gmail.com'
                 }
             }
