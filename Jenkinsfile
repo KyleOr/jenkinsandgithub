@@ -16,12 +16,10 @@ pipeline {
             }
             post {
                 always {
-                    // Email notification with build log and attachments for Unit and Integration Tests
+                    // Email with attached log for Unit and Integration Tests
                     emailext attachLog: true, 
-                             attachmentsPattern: '**/builds/${env.BUILD_NUMBER}/log',
-                             body: "${currentBuild.currentResult}: Unit and Integration Tests stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}\nMore info at: ${env.BUILD_URL}", 
-                             recipientProviders: [developers(), requestor()],
-                             subject: "Jenkins Build ${currentBuild.currentResult}: Unit and Integration Tests Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                             body: 'Unit and Integration Tests completed. Check logs for details.', 
+                             subject: 'Unit and Integration Tests - Build ${env.BUILD_NUMBER}', 
                              to: 'kyleerikoris@gmail.com'
                 }
             }
@@ -34,11 +32,10 @@ pipeline {
             }
             post {
                 always {
-                    // Email notification with build log and summary for Code Analysis
-                    emailext attachLog: true,
-                             body: "${currentBuild.currentResult}: Code Analysis stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}\nMore info at: ${env.BUILD_URL}",
-                             recipientProviders: [developers(), requestor()],
-                             subject: "Jenkins Build ${currentBuild.currentResult}: Code Analysis Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    // Email with attached log for Code Analysis
+                    emailext attachLog: true, 
+                             body: 'Code Analysis completed. Check logs for details.', 
+                             subject: 'Code Analysis - Build ${env.BUILD_NUMBER}', 
                              to: 'kyleerikoris@gmail.com'
                 }
             }
@@ -51,11 +48,10 @@ pipeline {
             }
             post {
                 always {
-                    // Email notification with build log and summary for Security Scan
-                    emailext attachLog: true,
-                             body: "${currentBuild.currentResult}: Security Scan stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}\nMore info at: ${env.BUILD_URL}",
-                             recipientProviders: [developers(), requestor()],
-                             subject: "Jenkins Build ${currentBuild.currentResult}: Security Scan Stage for ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    // Email with attached log for Security Scan
+                    emailext attachLog: true, 
+                             body: 'Security Scan completed. Check logs for details.', 
+                             subject: 'Security Scan - Build ${env.BUILD_NUMBER}', 
                              to: 'kyleerikoris@gmail.com'
                 }
             }
@@ -68,11 +64,10 @@ pipeline {
             }
             post {
                 always {
-                    // Email notification for Deploy to Staging
-                    emailext attachLog: true,
-                             body: "${currentBuild.currentResult}: Deploy to Staging for ${env.JOB_NAME} #${env.BUILD_NUMBER}\nMore info at: ${env.BUILD_URL}",
-                             recipientProviders: [developers(), requestor()],
-                             subject: "Jenkins Build ${currentBuild.currentResult}: Deploy to Staging for ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    // Email with attached log for Deploy to Staging
+                    emailext attachLog: true, 
+                             body: 'Deployed to Staging. Check logs for details.', 
+                             subject: 'Deploy to Staging - Build ${env.BUILD_NUMBER}', 
                              to: 'kyleerikoris@gmail.com'
                 }
             }
@@ -85,11 +80,10 @@ pipeline {
             }
             post {
                 always {
-                    // Email notification for Integration Tests on Staging
-                    emailext attachLog: true,
-                             body: "${currentBuild.currentResult}: Integration Tests on Staging for ${env.JOB_NAME} #${env.BUILD_NUMBER}\nMore info at: ${env.BUILD_URL}",
-                             recipientProviders: [developers(), requestor()],
-                             subject: "Jenkins Build ${currentBuild.currentResult}: Integration Tests on Staging for ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    // Email with attached log for Integration Tests on Staging
+                    emailext attachLog: true, 
+                             body: 'Integration Tests on Staging completed. Check logs for details.', 
+                             subject: 'Integration Tests on Staging - Build ${env.BUILD_NUMBER}', 
                              to: 'kyleerikoris@gmail.com'
                 }
             }
@@ -102,11 +96,10 @@ pipeline {
             }
             post {
                 always {
-                    // Email notification for Deploy to Production
-                    emailext attachLog: true,
-                             body: "${currentBuild.currentResult}: Deploy to Production for ${env.JOB_NAME} #${env.BUILD_NUMBER}\nMore info at: ${env.BUILD_URL}",
-                             recipientProviders: [developers(), requestor()],
-                             subject: "Jenkins Build ${currentBuild.currentResult}: Deploy to Production for ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    // Email with attached log for Deploy to Production
+                    emailext attachLog: true, 
+                             body: 'Deployed to Production. Check logs for details.', 
+                             subject: 'Deploy to Production - Build ${env.BUILD_NUMBER}', 
                              to: 'kyleerikoris@gmail.com'
                 }
             }
