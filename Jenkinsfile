@@ -20,7 +20,7 @@ pipeline {
                     emailext attachLog: true, 
                              body: 'Unit and Integration Tests completed. Check logs for details.', 
                              subject: 'Unit and Integration Tests - Build ${env.BUILD_NUMBER}', 
-                             to: 'kyleerikoris@gmail.com'
+                             to: 's223399201@deakin.edu.au'
                 }
             }
         }
@@ -36,7 +36,7 @@ pipeline {
                     emailext attachLog: true, 
                              body: 'Code Analysis completed. Check logs for details.', 
                              subject: 'Code Analysis - Build ${env.BUILD_NUMBER}', 
-                             to: 'kyleerikoris@gmail.com'
+                             to: 's223399201@deakin.edu.au'
                 }
             }
         }
@@ -52,7 +52,7 @@ pipeline {
                     emailext attachLog: true, 
                              body: 'Security Scan completed. Check logs for details.', 
                              subject: 'Security Scan - Build ${env.BUILD_NUMBER}', 
-                             to: 'kyleerikoris@gmail.com'
+                             to: 's223399201@deakin.edu.au'
                 }
             }
         }
@@ -68,7 +68,7 @@ pipeline {
                     emailext attachLog: true, 
                              body: 'Deployed to Staging. Check logs for details.', 
                              subject: 'Deploy to Staging - Build ${env.BUILD_NUMBER}', 
-                             to: 'kyleerikoris@gmail.com'
+                             to: 's223399201@deakin.edu.au'
                 }
             }
         }
@@ -84,7 +84,7 @@ pipeline {
                     emailext attachLog: true, 
                              body: 'Integration Tests on Staging completed. Check logs for details.', 
                              subject: 'Integration Tests on Staging - Build ${env.BUILD_NUMBER}', 
-                             to: 'kyleerikoris@gmail.com'
+                             to: 's223399201@deakin.edu.au'
                 }
             }
         }
@@ -100,7 +100,7 @@ pipeline {
                     emailext attachLog: true, 
                              body: 'Deployed to Production. Check logs for details.', 
                              subject: 'Deploy to Production - Build ${env.BUILD_NUMBER}', 
-                             to: 'kyleerikoris@gmail.com'
+                             to: 's223399201@deakin.edu.au'
                 }
             }
         }
